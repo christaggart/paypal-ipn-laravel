@@ -12,7 +12,7 @@
     "repositories" : [
         {
             "type": "vcs",
-            "url": "https://github.com/mavo/paypal-ipn-laravel"
+            "url": "https://github.com/mavo/paypal-ipn-listener"
         }
     ],
     "require": {
