@@ -7,10 +7,12 @@ use LogicalGrape\PayPalIpnLaravel\Exception\InvalidIpnException;
 use LogicalGrape\PayPalIpnLaravel\Models\IpnOrder;
 use LogicalGrape\PayPalIpnLaravel\Models\IpnOrderItem;
 use LogicalGrape\PayPalIpnLaravel\Models\IpnOrderItemOption;
+use PayPal\Ipn\Exception\UnexpectedResponseBodyException;
+use PayPal\Ipn\Exception\UnexpectedResponseStatusException;
 use PayPal\Ipn\Listener as PayPalListener;
-use PayPal\Ipn\Verifier as Request;
-use PayPal\Ipn\Request\CurlVerifier as CurlRequest;
-use PayPal\Ipn\Request\SocketVerifier as SocketRequest;
+use PayPal\Ipn\Request;
+use PayPal\Ipn\Request\Curl as CurlRequest;
+use PayPal\Ipn\Request\Socket as SocketRequest;
 
 /**
  * Class PayPalIpn
