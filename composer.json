@@ -18,7 +18,7 @@
     "require": {
         "php": ">=5.3.0",
         "illuminate/support": ">=4.0.0",
-        "moay/paypal-ipn-listener": "v1.1.0"
+        "moay/paypal-ipn-listener": "dev-master"
     },
     "autoload": {
         "classmap": [
