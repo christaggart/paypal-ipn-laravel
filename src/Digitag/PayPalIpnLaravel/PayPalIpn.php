@@ -1,22 +1,21 @@
-<?php namespace LogicalGrape\PayPalIpnLaravel;
+<?php namespace Digitag\PayPalIpnLaravel;
 
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Log;
-use LogicalGrape\PayPalIpnLaravel\Exception\InvalidIpnException;
-use LogicalGrape\PayPalIpnLaravel\Models\IpnOrder;
-use LogicalGrape\PayPalIpnLaravel\Models\IpnOrderItem;
-use LogicalGrape\PayPalIpnLaravel\Models\IpnOrderItemOption;
-use PayPal\Ipn\Exception\UnexpectedResponseBodyException;
-use PayPal\Ipn\Exception\UnexpectedResponseStatusException;
-use PayPal\Ipn\Listener as PayPalListener;
-use PayPal\Ipn\Request;
-use PayPal\Ipn\Request\Curl as CurlRequest;
-use PayPal\Ipn\Request\Socket as SocketRequest;
+use Digitag\PayPalIpnLaravel\Exception\InvalidIpnException;
+use Digitag\PayPalIpnLaravel\Models\IpnOrder;
+use Digitag\PayPalIpnLaravel\Models\IpnOrderItem;
+use Digitag\PayPalIpnLaravel\Models\IpnOrderItemOption;
+
+use PayPal\Ipn\Listener;
+use PayPal\Ipn\Message;
+use PayPal\Ipn\Verifier\CurlVerifier;
+use PayPal\Ipn\Verifier\SocketVerifier;
 
 /**
  * Class PayPalIpn
- * @package LogicalGrape\PayPalIpnLaravel
+ * @package Digitag\PayPalIpnLaravel
  *
  * References:
  * https://github.com/mike182uk/paypal-ipn-listener
@@ -35,16 +34,26 @@ class PayPalIpn
      */
     public function getOrder()
     {
-        $request = $this->getRequestHandler();
+        $listener = new Listener;
+        $verifier = $this->getRequestHandler();
+        $ipnMessage = Message::createFromGlobals();
 
-        $listener = new PayPalListener($request);
-        $listener->setMode($this->getEnvironment());
+        $verifier->setEnvironment($this->getEnvironment());
+        $verifier->setIpnMessage($ipnMessage);
+        $listener->setVerifier($verifier);
+        
+        $listener->listen(function() use ($listener) {
+            // on verified IPN (everything is good!)
+            $resp = $listener->getVerifier()->getVerificationResponse();
+            return $this->store($resp);
+        }, function() use ($listener) {
+            // on invalid IPN (somethings not right!)
+            //$report = $listener->getReport();
+            $resp = $listener->getVerifier()->getVerificationResponse();
+            throw new InvalidIpnException("PayPal as responded with INVALID", $resp);
+        });
 
-        if ($listener->verifyIpn()) {
-            return $this->store($request->getData());
-        } else {
-            throw new InvalidIpnException("PayPal as responded with INVALID");
-        }
+
     }
 
     /**
@@ -56,9 +65,9 @@ class PayPalIpn
     {
         $config = Config::get('paypal-ipn-laravel::request_handler', 'auto');
         if ($config == 'curl' || ($config == 'auto' && is_callable('curl_init'))) {
-            return new CurlRequest(Input::all());
+            return new CurlVerifier;
         } else {
-            return new SocketRequest(Input::all());
+            return new SocketVerifier;
         }
     }
 

@@ -1,5 +1,5 @@
 {
-    "name": "moay/paypal-ipn-laravel",
+    "name": "riccamastellone/paypal-ipn-laravel",
     "description": "A PayPal IPN client for Laravel.",
     "keywords": ["paypal", "ipn", "laravel"],
     "license": "MIT",
@@ -7,25 +7,29 @@
         {
             "name": "Chris Roemmich",
             "email": "chris@logicalgrape.com"
+        },
+        {
+            "name": "Riccardo Mastellone",
+            "email": "rmastellone@digitag.me"
         }
     ],
     "repositories" : [
         {
             "type": "vcs",
-            "url": "https://github.com/mavo/paypal-ipn-laravel"
+            "url": "https://github.com/riccamastellone/paypal-ipn-laravel"
         }
     ],
     "require": {
         "php": ">=5.3.0",
         "illuminate/support": ">=4.0.0",
-        "moay/paypal-ipn-listener": "dev-master"
+        "mike182uk/paypal-ipn-listener": "2.*"
     },
     "autoload": {
         "classmap": [
             "src/migrations"
         ],
         "psr-0": {
-            "LogicalGrape\\PayPalIpnLaravel\\": "src/"
+            "Digitag\\PayPalIpnLaravel\\": "src/"
         }
     }
 }

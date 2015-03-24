@@ -1,7 +1,7 @@
-<?php namespace LogicalGrape\PayPalIpnLaravel;
+<?php namespace Digitag\PayPalIpnLaravel;
 
 use Illuminate\Support\ServiceProvider;
-use LogicalGrape\PayPalIpnLaravel\PayPalIpn;
+use Digitag\PayPalIpnLaravel\PayPalIpn;
 
 class PayPalIpnServiceProvider extends ServiceProvider {
 
@@ -19,7 +19,7 @@ class PayPalIpnServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-		$this->package('logicalgrape/paypal-ipn-laravel');
+		$this->package('digitag/paypal-ipn-laravel');
 	}
 
 	/**

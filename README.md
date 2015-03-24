@@ -2,20 +2,19 @@ PayPal IPN for Laravel 4
 ========================
 
 This package allows for the painless creation of a PayPal IPN listener in the Laravel 4 framework.
+Originally developed by logicalgrape, it was forked an updated to cope with the POODLE vulnerability and
+consequential disabling of SSLv3 by PayPal
 
 
 Installation
 ------------
-
-PayPal IPN for Laravel can be found on [Packagist](https://packagist.org/packages/logicalgrape/paypal-ipn-laravel).
-The recommended way is through [composer](http://getcomposer.org).
 
 Edit `composer.json` and add:
 
 ```json
 {
     "require": {
-        "logicalgrape/paypal-ipn-laravel": "dev-master"
+        "riccamastellone/paypal-ipn-laravel": "2.*"
     }
 }
 ```
@@ -23,10 +22,8 @@ Edit `composer.json` and add:
 And install dependencies:
 
 ```bash
-$ curl -sS https://getcomposer.org/installer | php
-$ php composer.phar install
+$ composer update
 ```
-
 
 Usage
 -----
