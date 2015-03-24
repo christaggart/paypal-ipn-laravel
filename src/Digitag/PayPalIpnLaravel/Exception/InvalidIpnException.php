@@ -9,7 +9,7 @@ class InvalidIpnException extends \Exception {
         parent::__construct($message, 0, null);
     }
     
-    final function getMessage() {
+    public function getData() {
         return $this->data;
     }
     
