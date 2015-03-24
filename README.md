@@ -34,7 +34,7 @@ Find the `providers` key in `app/config/app.php` and register the **PayPal IPN S
 'providers' => array(
     // ...
 
-    'LogicalGrape\PayPalIpnLaravel\PayPalIpnServiceProvider',
+    'Digitag\PayPalIpnLaravel\PayPalIpnServiceProvider',
 )
 ```
 
@@ -44,7 +44,7 @@ Find the `aliases` key in `app/config/app.php` and register the **PayPal IPN Fac
 'aliases' => array(
     // ...
 
-    'IPN' => 'LogicalGrape\PayPalIpnLaravel\Facades\IPN',
+    'IPN' => 'Digitag\PayPalIpnLaravel\Facades\IPN',
 )
 ```
 
@@ -55,7 +55,7 @@ Migrations
 Run the migrations to create the tables to hold IPN data
 
 ```bash
-$ php artisan migrate --package logicalgrape/paypal-ipn-laravel
+$ php artisan migrate --package digitag/paypal-ipn-laravel
 ```
 
 
@@ -65,7 +65,7 @@ Configuration
 Publish and edit the configuration file
 
 ```bash
-$ php artisan config:publish logicalgrape/paypal-ipn-laravel
+$ php artisan config:publish digitag/paypal-ipn-laravel
 ```
 
 
@@ -100,12 +100,12 @@ To help with IPN testing, PayPal provides the
 Support
 -------
 
-[Please open an issue on GitHub](https://github.com/logicalgrape/paypal-ipn-laravel/issues)
+[Please open an issue on GitHub](https://github.com/riccamastellone/paypal-ipn-laravel/issues)
 
 
 License
 -------
 
 GeocoderLaravel is released under the MIT License. See the bundled
-[LICENSE](https://github.com/logicalgrape/paypal-ipn-laravel/blob/master/LICENSE)
+[LICENSE](https://github.com/riccamastellone/paypal-ipn-laravel/blob/master/LICENSE)
 file for details.
