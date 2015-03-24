@@ -48,9 +48,9 @@ class PayPalIpn
             return $this->store($resp);
         }, function() use ($listener) {
             // on invalid IPN (somethings not right!)
-            //$report = $listener->getReport();
+            $report = $listener->getReport();
             $resp = $listener->getVerifier()->getVerificationResponse();
-            throw new InvalidIpnException("PayPal as responded with INVALID", $resp);
+            throw new InvalidIpnException("PayPal as responded with INVALID", $resp, $report);
         });
 
 
