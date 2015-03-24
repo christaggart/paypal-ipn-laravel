@@ -25,6 +25,13 @@ class PayPalIpn
 {
 
     /**
+     * Order object
+     *
+     * @var IpnOrder
+     */
+    protected $order = null;
+    
+    /**
      * Listens for and stores PayPal IPN requests.
      *
      * @return IpnOrder
@@ -42,10 +49,8 @@ class PayPalIpn
         $verifier->setIpnMessage($ipnMessage);
         $listener->setVerifier($verifier);
         
-        $listener->listen(function() use ($listener) {
-            // on verified IPN (everything is good!)
-            $resp = $listener->getVerifier()->getVerificationResponse();
-            return $this->store($resp);
+        $listener->listen(function() use ($ipnMessage) {
+            $this->order = $this->store($ipnMessage);
         }, function() use ($listener) {
             // on invalid IPN (somethings not right!)
             $report = $listener->getReport();
@@ -53,6 +58,7 @@ class PayPalIpn
             throw new InvalidIpnException("PayPal as responded with INVALID", $resp, $report);
         });
 
+        return $this->order;
 
     }
 
@@ -94,16 +100,16 @@ class PayPalIpn
     /**
      * Stores the IPN contents and returns the IpnOrder object.
      *
-     * @param array $data
+     * @param PayPal\Ipn\Message $data
      * @return IpnOrder
      */
     private function store($data)
     {
         if (array_key_exists('txn_id', $data)) {
             $order = IpnOrder::firstOrNew(array('txn_id' => $data['txn_id']));
-            $order->fill($data);
+            $order->fill($data->getIterator()->getArrayCopy());
         } else {
-            $order = new IpnOrder($data);
+            $order = new IpnOrder($data->getIterator()->getArrayCopy());
         }
         $order->full_ipn = json_encode(Input::all());
         $order->save();
@@ -112,7 +118,7 @@ class PayPalIpn
 
         return $order;
     }
-
+    
     /**
      * Stores the order items from the IPN contents.
      *

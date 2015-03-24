@@ -1,4 +1,4 @@
-<?php namespace Digitag\LaraPal\Models;
+<?php namespace Digitag\PayPalIpnLaravel\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
