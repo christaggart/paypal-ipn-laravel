@@ -20,6 +20,16 @@ class PayPalIpnServiceProvider extends ServiceProvider {
 	public function boot()
 	{
 		$this->package('digitag/paypal-ipn-laravel');
+                
+                // Configuration file
+                $this->publishes([
+                    __DIR__.'/../config/config.php' => config_path('paypal.php'),
+                ]);
+                
+                // Migrations
+                $this->publishes([
+                    __DIR__.'/../migrations/' => database_path('/migrations')
+                ], 'migrations');
 	}
 
 	/**

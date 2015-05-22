@@ -14,7 +14,7 @@ Edit `composer.json` and add:
 ```json
 {
     "require": {
-        "riccamastellone/paypal-ipn-laravel": "2.*"
+        "riccamastellone/paypal-ipn-laravel": "3.*"
     }
 }
 ```
@@ -24,6 +24,8 @@ And install dependencies:
 ```bash
 $ composer update
 ```
+
+**Laravel 4: ** If you need to use this package with Laravel 4, you may use version 2.*
 
 Usage
 -----
@@ -49,23 +51,25 @@ Find the `aliases` key in `app/config/app.php` and register the **PayPal IPN Fac
 ```
 
 
-Migrations
-----------
-
-Run the migrations to create the tables to hold IPN data
-
-```bash
-$ php artisan migrate --package digitag/paypal-ipn-laravel
-```
-
-
 Configuration
 -------------
 
 Publish and edit the configuration file
 
 ```bash
-$ php artisan config:publish digitag/paypal-ipn-laravel
+$ php artisan vendor:publish
+```
+This will create a config/paypal.php file in your app that you can modify to set your configuration 
+and add then required database migration for this package to work
+
+
+Migrations
+----------
+
+Run the migrations to create the tables to hold IPN data
+
+```bash
+$ php artisan migrate
 ```
 
 
@@ -75,7 +79,7 @@ Example
 Create the controller PayPal will POST to
 
 ```bash
-$ php artisan controller:make IpnController --only=store
+$ php artisan make:controller IpnController --only=store
 ```
 
 Open the newly created controller and add the following to the store action
@@ -84,7 +88,7 @@ Open the newly created controller and add the following to the store action
 $order = IPN::getOrder();
 ```
 
-Edit `app/routes.php` and add:
+Edit `app/Http/routes.php` and add:
 
 ```php
 Route::post('ipn', array('uses' => 'IpnController@store', 'as' => 'ipn'));

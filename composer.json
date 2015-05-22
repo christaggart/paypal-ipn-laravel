@@ -20,9 +20,9 @@
         }
     ],
     "require": {
-        "php": ">=5.3.0",
-        "illuminate/support": ">=4.0.0",
-        "mike182uk/paypal-ipn-listener": "2.*"
+        "php": ">=5.4.0",
+        "illuminate/support": ">=5.0.0",
+        "mike182uk/paypal-ipn-listener": "3.*"
     },
     "autoload": {
         "classmap": [
