@@ -1,4 +1,4 @@
-PayPal IPN for Laravel 4
+PayPal IPN for Laravel 5
 ========================
 
 This package allows for the painless creation of a PayPal IPN listener in the Laravel 4 framework.
@@ -25,7 +25,7 @@ And install dependencies:
 $ composer update
 ```
 
-**Laravel 4: ** If you need to use this package with Laravel 4, you may use version 2.*
+**Laravel 4:** If you need to use this package with Laravel 4, you may use version `2.*`
 
 Usage
 -----
@@ -59,7 +59,7 @@ Publish and edit the configuration file
 ```bash
 $ php artisan vendor:publish
 ```
-This will create a config/paypal.php file in your app that you can modify to set your configuration 
+This will create a `config/paypal.php` file in your app that you can modify to set your configuration 
 and add then required database migration for this package to work
 
 
