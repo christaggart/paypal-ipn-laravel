@@ -19,17 +19,15 @@ class PayPalIpnServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-		$this->package('digitag/paypal-ipn-laravel');
-                
-                // Configuration file
-                $this->publishes([
-                    __DIR__.'/../config/config.php' => config_path('paypal.php'),
-                ]);
-                
-                // Migrations
-                $this->publishes([
-                    __DIR__.'/../migrations/' => database_path('/migrations')
-                ], 'migrations');
+            // Configuration file
+            $this->publishes([
+                __DIR__.'/../../config/config.php' => config_path('paypal.php'),
+            ]);
+
+            // Migrations
+            $this->publishes([
+                __DIR__.'/../../migrations/' => database_path('/migrations')
+            ], 'migrations');
 	}
 
 	/**
@@ -39,9 +37,10 @@ class PayPalIpnServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-        $this->app['paypalipn'] = $this->app->share(function ($app) {
-            return new PayPalIpn();
-        });
+            $this->app->singleton('paypalipn', function ($app) {
+                return new PayPalIpn();
+            });
+            $this->app->alias('paypalipn', 'Digitag\PayPalIpnLaravel\PayPalIpn');
 	}
 
 	/**
