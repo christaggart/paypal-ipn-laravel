@@ -110,6 +110,6 @@ Support
 License
 -------
 
-GeocoderLaravel is released under the MIT License. See the bundled
+This package is released under the MIT License. See the bundled
 [LICENSE](https://github.com/riccamastellone/paypal-ipn-laravel/blob/master/LICENSE)
 file for details.
