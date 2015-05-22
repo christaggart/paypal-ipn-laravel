@@ -30,7 +30,7 @@ $ composer update
 Usage
 -----
 
-Find the `providers` key in `app/config/app.php` and register the **PayPal IPN Service Provider**.
+Find the `providers` key in `config/app.php` and register the **PayPal IPN Service Provider**.
 
 ```php
 'providers' => array(
@@ -40,7 +40,7 @@ Find the `providers` key in `app/config/app.php` and register the **PayPal IPN S
 )
 ```
 
-Find the `aliases` key in `app/config/app.php` and register the **PayPal IPN Facade**.
+Find the `aliases` key in `config/app.php` and register the **PayPal IPN Facade**.
 
 ```php
 'aliases' => array(
