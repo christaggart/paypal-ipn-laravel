@@ -4,7 +4,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
 class IpnOrderItem extends Model {
-    use SoftDeletingTrait;
+    protected $softDelete = true;
 
     protected $dates = ['deleted_at'];
 
