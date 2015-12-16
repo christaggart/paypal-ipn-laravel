@@ -93,10 +93,10 @@ class PayPalIpn
      *
      * @return IpnOrder
      */
-    private function store($data)
+    private function store(\Mdb\PayPal\Ipn\Message $data)
     {
-        if (array_key_exists('txn_id', $data)) {
-            $order = IpnOrder::firstOrNew(['txn_id' => $data[ 'txn_id' ]]);
+        if ($data->get('txn_id')) {
+            $order = IpnOrder::firstOrNew(['txn_id' => $data->get('txn_id')]);
             $order->fill($data->getAll());
         } else {
             $order = new IpnOrder($data->getAll());
