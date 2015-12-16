@@ -5,7 +5,6 @@ use Illuminate\Database\Schema\Blueprint;
 
 class CreateIpnOrdersTable extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -115,5 +114,4 @@ class CreateIpnOrdersTable extends Migration
     {
         Schema::drop('ipn_orders');
     }
-
 }

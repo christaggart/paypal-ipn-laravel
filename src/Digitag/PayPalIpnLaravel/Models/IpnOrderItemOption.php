@@ -1,10 +1,12 @@
-<?php namespace Digitag\PayPalIpnLaravel\Models;
+<?php
+
+namespace Digitag\PayPalIpnLaravel\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
-class IpnOrderItemOption extends Model {
-
+class IpnOrderItemOption extends Model
+{
     //use SoftDeletingTrait;
     protected $softDelete = true;
 
@@ -18,5 +20,4 @@ class IpnOrderItemOption extends Model {
     {
         return $this->belongsTo('Digitag\PayPalIpnLaravel\Models\IpnOrderItem');
     }
-
 }

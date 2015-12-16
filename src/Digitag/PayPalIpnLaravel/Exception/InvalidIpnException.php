@@ -1,34 +1,37 @@
-<?php namespace Digitag\PayPalIpnLaravel\Exception;
+<?php
 
-class InvalidIpnException extends \Exception {
-    
+namespace Digitag\PayPalIpnLaravel\Exception;
+
+class InvalidIpnException extends \Exception
+{
     /**
-     * PayPal IPN reponse
+     * PayPal IPN reponse.
      *
      * @var array
      */
-    protected $data = array();
-    
+    protected $data = [];
+
     /**
-     * PayPal Report
+     * PayPal Report.
      *
      * @var string
      */
-    protected $report = NULL;
+    protected $report = null;
 
-    public function __construct($message, $response = null, $report = null) {
+    public function __construct($message, $response = null, $report = null)
+    {
         $this->data = $response;
         $this->report = $report;
         parent::__construct($message, 0, null);
     }
-    
-    public function getData() {
+
+    public function getData()
+    {
         return $this->data;
     }
-    
-    public function getReport() {
+
+    public function getReport()
+    {
         return $this->report;
     }
-    
-    
 }
