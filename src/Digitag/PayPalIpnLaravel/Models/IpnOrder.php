@@ -1,18 +1,18 @@
-<?php namespace Digitag\PayPalIpnLaravel\Models;
+<?php
+
+namespace Digitag\PayPalIpnLaravel\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
-use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
 class IpnOrder extends Model
 {
     protected $softDelete = true;
-    
+
     protected $dates = ['deleted_at'];
-    
+
     protected $table = 'ipn_orders';
 
-    protected $fillable = array(
+    protected $fillable = [
         'notify_version', 'verify_sign', 'test_ipn', 'protection_eligibility', 'charset',
         'btn_id', 'address_city', 'address_country', 'address_country_code', 'address_name', 'address_state',
         'address_status', 'address_street', 'address_zip', 'first_name', 'last_name', 'payer_business_name',
@@ -25,11 +25,11 @@ class IpnOrder extends Model
         'auction_multi_item', 'for_auction', 'subscr_date', 'subscr_effective', 'period1', 'period2', 'period3',
         'amount1', 'amount2', 'amount3', 'mc_amount1', 'mc_amount2', 'mc_amount3', 'reattempt', 'retry_at',
         'recur_times', 'username', 'password', 'subscr_id', 'case_id', 'case_type', 'case_creation_date',
-        'order_status', 'discount', 'shipping_discount', 'ipn_track_id', 'transaction_subject', 'full_ipn'
-    );
+        'order_status', 'discount', 'shipping_discount', 'ipn_track_id', 'transaction_subject', 'full_ipn',
+    ];
 
-    public function items() {
+    public function items()
+    {
         return $this->hasMany('Digitag\PayPalIpnLaravel\Models\IpnOrderItem');
     }
-
 }

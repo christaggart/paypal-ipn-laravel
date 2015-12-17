@@ -3,8 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateIpnOrderItems extends Migration {
-
+class CreateIpnOrderItems extends Migration
+{
     /**
      * Run the migrations.
      *
@@ -27,14 +27,13 @@ class CreateIpnOrderItems extends Migration {
         });
     }
 
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
-	public function down()
-	{
-	    Schema::drop('ipn_order_items');
-	}
-
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::drop('ipn_order_items');
+    }
 }
